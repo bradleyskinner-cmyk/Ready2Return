@@ -12,11 +12,7 @@
 
 <style>
 
-* {
-
-  box-sizing: border-box;
-
-}
+* { box-sizing: border-box; }
 
 body {
 
@@ -78,11 +74,7 @@ body {
 
 }
 
-.screen.active {
-
-  display: block;
-
-}
+.screen.active { display: block; }
 
 .card {
 
@@ -120,11 +112,7 @@ body {
 
 }
 
-.stat {
-
-  flex: 1;
-
-}
+.stat { flex: 1; }
 
 .stat strong {
 
@@ -162,11 +150,7 @@ body {
 
 }
 
-input,
-
-select,
-
-textarea {
+input, select, textarea {
 
   width: 100%;
 
@@ -182,11 +166,7 @@ textarea {
 
 }
 
-textarea {
-
-  resize: vertical;
-
-}
+textarea { resize: vertical; }
 
 button {
 
@@ -219,6 +199,12 @@ button.secondary {
   color: #315bdb;
 
   border: 1px solid #b9c7f5;
+
+}
+
+button:disabled {
+
+  opacity: .7;
 
 }
 
@@ -316,6 +302,58 @@ button.secondary {
 
 }
 
+.tracking {
+
+  margin-top: 14px;
+
+  border-top: 1px solid #e5e7eb;
+
+  padding-top: 8px;
+
+}
+
+.track-row {
+
+  display: flex;
+
+  justify-content: space-between;
+
+  gap: 12px;
+
+  padding: 10px 0;
+
+  border-bottom: 1px solid #f1f5f9;
+
+}
+
+.track-row:last-child {
+
+  border-bottom: 0;
+
+}
+
+.track-label {
+
+  font-weight: 600;
+
+}
+
+.track-time {
+
+  font-size: 13px;
+
+  color: #64748b;
+
+  text-align: right;
+
+}
+
+.waiting {
+
+  color: #94a3b8;
+
+}
+
 </style>
 
 </head>
@@ -344,29 +382,29 @@ button.secondary {
 
 <div class="card stats">
 
-<div class="stat">
+  <div class="stat">
 
-<strong>2</strong>
+    <strong>2</strong>
 
-<span class="small">Out sick</span>
+    <span class="small">Out sick</span>
 
-</div>
+  </div>
 
-<div class="stat">
+  <div class="stat">
 
-<strong>1</strong>
+    <strong>1</strong>
 
-<span class="small">Pending review</span>
+    <span class="small">Pending review</span>
 
-</div>
+  </div>
 
-<div class="stat">
+  <div class="stat">
 
-<strong>1</strong>
+    <strong>1</strong>
 
-<span class="small">Ready</span>
+    <span class="small">Ready</span>
 
-</div>
+  </div>
 
 </div>
 
@@ -380,25 +418,17 @@ button.secondary {
 
 <div class="card" onclick="showScreen('case')" style="cursor:pointer">
 
-<div class="row">
+  <div class="row">
 
-<strong>Emma Carter</strong>
+    <strong>Emma Carter</strong>
 
-<span class="pill pending">Pending</span>
+    <span class="pill pending">Pending</span>
 
-</div>
+  </div>
 
-<p class="small">
+  <p class="small">Fever • Parent notification tracking active</p>
 
-Fever • Parent acknowledged policy
-
-</p>
-
-<p>
-
-Return requirements pending.
-
-</p>
+  <p>Return requirements pending.</p>
 
 </div>
 
@@ -416,7 +446,7 @@ It does not diagnose illness or make medical decisions.
 
 </section>
 
-<!-- REPORT CHILD -->
+<!-- REPORT -->
 
 <section id="report" class="screen">
 
@@ -428,19 +458,15 @@ It does not diagnose illness or make medical decisions.
 
 <h2>Report Illness</h2>
 
-<p class="subtitle">
-
-Create an incident and notify the parent.
-
-</p>
+<p class="subtitle">Create an incident and notify the parent.</p>
 
 <div class="label">CHILD</div>
 
 <select>
 
-<option>Emma Carter — Preschool Room A</option>
+  <option>Emma Carter — Preschool Room A</option>
 
-<option>Mason Reed — Toddler Room</option>
+  <option>Mason Reed — Toddler Room</option>
 
 </select>
 
@@ -448,15 +474,15 @@ Create an incident and notify the parent.
 
 <select>
 
-<option>Fever</option>
+  <option>Fever</option>
 
-<option>Vomiting</option>
+  <option>Vomiting</option>
 
-<option>Diarrhea</option>
+  <option>Diarrhea</option>
 
-<option>Rash / skin concern</option>
+  <option>Rash / skin concern</option>
 
-<option>Other</option>
+  <option>Other</option>
 
 </select>
 
@@ -492,37 +518,35 @@ Continue
 
 <h2>Return Requirements</h2>
 
-<p class="subtitle">
-
-Based on the center's configured policy.
-
-</p>
+<p class="subtitle">Based on the center's configured policy.</p>
 
 <div class="card">
 
-<div class="row">
+  <div class="row">
 
-<strong>Fever Policy</strong>
+    <strong>Fever Policy</strong>
 
-<span class="pill pending">Center Policy</span>
+    <span class="pill pending">Center Policy</span>
+
+  </div>
+
+  <p>
+
+  Emma must meet Little Pines Learning Center's configured
+
+  fever-return requirements before returning to care.
+
+  </p>
+
+  <p class="small">
+
+  Policies are configured by center administration.
+
+  </p>
 
 </div>
 
-<p>
-
-Emma must meet Little Pines Learning Center's configured fever-return requirements before returning to care.
-
-</p>
-
-<p class="small">
-
-Policies are configured by center administration.
-
-</p>
-
-</div>
-
-<button onclick="showScreen('sent')">
+<button onclick="sendNotification()">
 
 Send Parent Notification
 
@@ -538,31 +562,65 @@ Send Parent Notification
 
 <div class="success">
 
-<strong>Emma's parent has been notified.</strong>
+  <strong>Emma's parent has been notified.</strong>
 
-<p class="small">
+  <p class="small">
 
-The incident has been documented and time-stamped.
+  Ready2Return has started notification tracking for this incident.
 
-</p>
+  </p>
 
 </div>
 
-<button onclick="showScreen('parent')">
+<div class="card">
 
-Preview Parent View
+  <h3>Parent Notification</h3>
+
+  <div class="tracking">
+
+    <div class="track-row">
+
+      <span class="track-label">✓ Sent</span>
+
+      <span class="track-time" id="sentTime">—</span>
+
+    </div>
+
+    <div class="track-row">
+
+      <span class="track-label">👁 Viewed</span>
+
+      <span class="track-time waiting" id="viewedTime">Waiting for parent</span>
+
+    </div>
+
+    <div class="track-row">
+
+      <span class="track-label">✓ Acknowledged</span>
+
+      <span class="track-time waiting" id="ackTime">Waiting for parent</span>
+
+    </div>
+
+  </div>
+
+</div>
+
+<button onclick="openParentView()">
+
+Preview Parent Opening Notification
 
 </button>
 
-<button class="secondary" onclick="showScreen('home')">
+<button class="secondary" onclick="showScreen('case')">
 
-Back to Dashboard
+View Staff Case
 
 </button>
 
 </section>
 
-<!-- PARENT VIEW -->
+<!-- PARENT -->
 
 <section id="parent" class="screen">
 
@@ -576,19 +634,15 @@ Parent View • Little Pines Learning Center
 
 <div class="card">
 
-<div class="row">
+  <div class="row">
 
-<strong>Current Status</strong>
+    <strong>Current Status</strong>
 
-<span class="pill notready">Not Cleared</span>
+    <span class="pill notready">Not Cleared</span>
 
-</div>
+  </div>
 
-<p>
-
-Emma was sent home after a fever was recorded.
-
-</p>
+  <p>Emma was sent home after a fever was recorded.</p>
 
 </div>
 
@@ -602,7 +656,7 @@ Please review and follow Little Pines Learning Center's fever-return policy.
 
 </p>
 
-<button class="secondary" onclick="acknowledge(this)">
+<button id="ackButton" class="secondary" onclick="acknowledgePolicy()">
 
 Acknowledge Policy
 
@@ -618,7 +672,7 @@ Upload Documentation
 
 <button onclick="showScreen('case')">
 
-Preview Staff Review
+Return to Staff Review Demo
 
 </button>
 
@@ -636,51 +690,63 @@ Preview Staff Review
 
 <h2>Emma Carter</h2>
 
-<p class="subtitle">
-
-Illness Case #R2R-1042
-
-</p>
+<p class="subtitle">Illness Case #R2R-1042</p>
 
 <div class="card">
 
 <div class="row">
 
-<strong>Return Status</strong>
+  <strong>Return Status</strong>
 
-<span class="pill pending">Pending</span>
+  <span class="pill pending">Pending</span>
 
 </div>
 
-<p>
+<p>✓ Incident documented</p>
 
-✓ Incident documented
+<p>✓ Parent notified</p>
 
-</p>
+<p id="caseViewed">○ Parent has not viewed notification</p>
 
-<p>
+<p id="caseAck">○ Policy acknowledgment pending</p>
 
-✓ Parent notified
+<p>○ Return requirements reviewed</p>
 
-</p>
+<p>○ Staff approval</p>
 
-<p>
+</div>
 
-✓ Policy acknowledged
+<div class="card">
 
-</p>
+<h3>Notification Activity</h3>
 
-<p>
+<div class="tracking">
 
-○ Return requirements reviewed
+  <div class="track-row">
 
-</p>
+    <span class="track-label">✓ Sent</span>
 
-<p>
+    <span class="track-time" id="caseSentTime">—</span>
 
-○ Staff approval
+  </div>
 
-</p>
+  <div class="track-row">
+
+    <span class="track-label">👁 Viewed</span>
+
+    <span class="track-time waiting" id="caseViewedTime">Not viewed</span>
+
+  </div>
+
+  <div class="track-row">
+
+    <span class="track-label">✓ Acknowledged</span>
+
+    <span class="track-time waiting" id="caseAckTime">Not acknowledged</span>
+
+  </div>
+
+</div>
 
 </div>
 
@@ -692,7 +758,7 @@ Review Return Request
 
 </section>
 
-<!-- STAFF REVIEW -->
+<!-- REVIEW -->
 
 <section id="review" class="screen">
 
@@ -714,7 +780,7 @@ Confirm the center's requirements have been satisfied.
 
 <h3>Center Checklist</h3>
 
-<p>☑ Parent acknowledged policy</p>
+<p id="reviewAck">☐ Parent acknowledgment pending</p>
 
 <p>☑ Required information received</p>
 
@@ -770,6 +836,12 @@ Return to Dashboard
 
 <script>
 
+let sentAt = null;
+
+let viewedAt = null;
+
+let acknowledgedAt = null;
+
 function showScreen(id) {
 
   document.querySelectorAll(".screen").forEach(function(screen) {
@@ -779,6 +851,8 @@ function showScreen(id) {
   });
 
   document.getElementById(id).classList.add("active");
+
+  updateTracking();
 
   window.scrollTo({
 
@@ -790,11 +864,137 @@ function showScreen(id) {
 
 }
 
-function acknowledge(button) {
+function getTime() {
+
+  return new Date().toLocaleTimeString([], {
+
+    hour: "numeric",
+
+    minute: "2-digit"
+
+  });
+
+}
+
+function sendNotification() {
+
+  sentAt = getTime();
+
+  viewedAt = null;
+
+  acknowledgedAt = null;
+
+  document.getElementById("ackButton").disabled = false;
+
+  document.getElementById("ackButton").innerHTML = "Acknowledge Policy";
+
+  showScreen("sent");
+
+}
+
+function openParentView() {
+
+  if (!viewedAt) {
+
+    viewedAt = getTime();
+
+  }
+
+  showScreen("parent");
+
+}
+
+function acknowledgePolicy() {
+
+  if (!viewedAt) {
+
+    viewedAt = getTime();
+
+  }
+
+  if (!acknowledgedAt) {
+
+    acknowledgedAt = getTime();
+
+  }
+
+  const button = document.getElementById("ackButton");
 
   button.innerHTML = "✓ Policy Acknowledged";
 
   button.disabled = true;
+
+  updateTracking();
+
+}
+
+function updateTracking() {
+
+  const sentText = sentAt || "—";
+
+  const viewedText = viewedAt || "Waiting for parent";
+
+  const ackText = acknowledgedAt || "Waiting for parent";
+
+  document.getElementById("sentTime").innerHTML = sentText;
+
+  document.getElementById("viewedTime").innerHTML = viewedText;
+
+  document.getElementById("ackTime").innerHTML = ackText;
+
+  document.getElementById("caseSentTime").innerHTML = sentText;
+
+  document.getElementById("caseViewedTime").innerHTML =
+
+    viewedAt || "Not viewed";
+
+  document.getElementById("caseAckTime").innerHTML =
+
+    acknowledgedAt || "Not acknowledged";
+
+  if (viewedAt) {
+
+    document.getElementById("viewedTime").classList.remove("waiting");
+
+    document.getElementById("caseViewedTime").classList.remove("waiting");
+
+    document.getElementById("caseViewed").innerHTML =
+
+      "✓ Parent viewed notification at " + viewedAt;
+
+  } else {
+
+    document.getElementById("caseViewed").innerHTML =
+
+      "○ Parent has not viewed notification";
+
+  }
+
+  if (acknowledgedAt) {
+
+    document.getElementById("ackTime").classList.remove("waiting");
+
+    document.getElementById("caseAckTime").classList.remove("waiting");
+
+    document.getElementById("caseAck").innerHTML =
+
+      "✓ Policy acknowledged at " + acknowledgedAt;
+
+    document.getElementById("reviewAck").innerHTML =
+
+      "☑ Parent acknowledged policy at " + acknowledgedAt;
+
+  } else {
+
+    document.getElementById("caseAck").innerHTML =
+
+      "○ Policy acknowledgment pending";
+
+    document.getElementById("reviewAck").innerHTML =
+
+      "☐ Parent acknowledgment pending";
+
+  }
 
 }
 
@@ -802,7 +1002,7 @@ function demoUpload() {
 
   alert(
 
-    "Ready2Return Demo\\n\\nIn the finished app, the parent could upload a doctor's note or other documentation here."
+    "Ready2Return Demo\n\nIn the finished app, the parent could upload a doctor's note or other documentation here."
 
   );
 
