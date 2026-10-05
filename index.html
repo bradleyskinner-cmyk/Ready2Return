@@ -1,0 +1,825 @@
+<!DOCTYPE html>
+
+<html lang="en">
+
+<head>
+
+<meta charset="UTF-8">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Ready2Return</title>
+
+<style>
+
+* {
+
+  box-sizing: border-box;
+
+}
+
+body {
+
+  margin: 0;
+
+  background: #f4f7fb;
+
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+
+  color: #172033;
+
+}
+
+.app {
+
+  max-width: 430px;
+
+  margin: auto;
+
+  min-height: 100vh;
+
+  background: #f8fafc;
+
+}
+
+.header {
+
+  background: #315bdb;
+
+  color: white;
+
+  padding: 24px 20px;
+
+}
+
+.header h1 {
+
+  margin: 0;
+
+  font-size: 28px;
+
+}
+
+.header p {
+
+  margin: 5px 0 0;
+
+  color: #dbeafe;
+
+  font-size: 13px;
+
+}
+
+.screen {
+
+  display: none;
+
+  padding: 20px;
+
+}
+
+.screen.active {
+
+  display: block;
+
+}
+
+.card {
+
+  background: white;
+
+  border: 1px solid #e5e7eb;
+
+  border-radius: 16px;
+
+  padding: 16px;
+
+  margin: 14px 0;
+
+  box-shadow: 0 3px 12px rgba(0,0,0,.04);
+
+}
+
+.row {
+
+  display: flex;
+
+  justify-content: space-between;
+
+  align-items: center;
+
+  gap: 10px;
+
+}
+
+.stats {
+
+  display: flex;
+
+  text-align: center;
+
+}
+
+.stat {
+
+  flex: 1;
+
+}
+
+.stat strong {
+
+  display: block;
+
+  font-size: 25px;
+
+}
+
+.small {
+
+  font-size: 12px;
+
+  color: #6b7280;
+
+}
+
+.subtitle {
+
+  color: #6b7280;
+
+  margin-top: 4px;
+
+}
+
+.label {
+
+  font-size: 12px;
+
+  font-weight: bold;
+
+  color: #6b7280;
+
+  margin: 16px 0 6px;
+
+}
+
+input,
+
+select,
+
+textarea {
+
+  width: 100%;
+
+  padding: 13px;
+
+  border: 1px solid #d7dce5;
+
+  border-radius: 11px;
+
+  background: white;
+
+  font-size: 16px;
+
+}
+
+textarea {
+
+  resize: vertical;
+
+}
+
+button {
+
+  width: 100%;
+
+  padding: 15px;
+
+  margin-top: 12px;
+
+  border: 0;
+
+  border-radius: 13px;
+
+  background: #315bdb;
+
+  color: white;
+
+  font-size: 16px;
+
+  font-weight: 700;
+
+  cursor: pointer;
+
+}
+
+button.secondary {
+
+  background: white;
+
+  color: #315bdb;
+
+  border: 1px solid #b9c7f5;
+
+}
+
+.back {
+
+  width: auto;
+
+  padding: 0;
+
+  margin: 0 0 15px;
+
+  background: transparent;
+
+  color: #315bdb;
+
+  font-weight: 600;
+
+}
+
+.pill {
+
+  padding: 6px 10px;
+
+  border-radius: 999px;
+
+  font-size: 12px;
+
+  font-weight: bold;
+
+}
+
+.pending {
+
+  background: #fef3c7;
+
+  color: #92400e;
+
+}
+
+.notready {
+
+  background: #fee2e2;
+
+  color: #991b1b;
+
+}
+
+.ready {
+
+  background: #dcfce7;
+
+  color: #166534;
+
+}
+
+.notice {
+
+  background: #eef2ff;
+
+  border-left: 4px solid #315bdb;
+
+  border-radius: 10px;
+
+  padding: 13px;
+
+  font-size: 13px;
+
+  margin-top: 18px;
+
+}
+
+.success {
+
+  background: #ecfdf5;
+
+  border: 1px solid #a7f3d0;
+
+  border-radius: 14px;
+
+  padding: 16px;
+
+  margin-top: 15px;
+
+}
+
+.demo {
+
+  font-size: 11px;
+
+  text-transform: uppercase;
+
+  letter-spacing: 1px;
+
+  opacity: .85;
+
+}
+
+</style>
+
+</head>
+
+<body>
+
+<div class="app">
+
+<div class="header">
+
+  <div class="demo">Interactive Demo</div>
+
+  <h1>Ready2Return</h1>
+
+  <p>Simple sick-child tracking & return-to-care management</p>
+
+</div>
+
+<!-- DASHBOARD -->
+
+<section id="home" class="screen active">
+
+<h2>Staff Dashboard</h2>
+
+<div class="subtitle">Little Pines Learning Center</div>
+
+<div class="card stats">
+
+<div class="stat">
+
+<strong>2</strong>
+
+<span class="small">Out sick</span>
+
+</div>
+
+<div class="stat">
+
+<strong>1</strong>
+
+<span class="small">Pending review</span>
+
+</div>
+
+<div class="stat">
+
+<strong>1</strong>
+
+<span class="small">Ready</span>
+
+</div>
+
+</div>
+
+<button onclick="showScreen('report')">
+
++ Report a Sick Child
+
+</button>
+
+<h3>Active Cases</h3>
+
+<div class="card" onclick="showScreen('case')" style="cursor:pointer">
+
+<div class="row">
+
+<strong>Emma Carter</strong>
+
+<span class="pill pending">Pending</span>
+
+</div>
+
+<p class="small">
+
+Fever • Parent acknowledged policy
+
+</p>
+
+<p>
+
+Return requirements pending.
+
+</p>
+
+</div>
+
+<div class="notice">
+
+<strong>Demo notice:</strong>
+
+All names and information shown here are fictional.
+
+Ready2Return documents a center's policies and workflow.
+
+It does not diagnose illness or make medical decisions.
+
+</div>
+
+</section>
+
+<!-- REPORT CHILD -->
+
+<section id="report" class="screen">
+
+<button class="back" onclick="showScreen('home')">
+
+← Dashboard
+
+</button>
+
+<h2>Report Illness</h2>
+
+<p class="subtitle">
+
+Create an incident and notify the parent.
+
+</p>
+
+<div class="label">CHILD</div>
+
+<select>
+
+<option>Emma Carter — Preschool Room A</option>
+
+<option>Mason Reed — Toddler Room</option>
+
+</select>
+
+<div class="label">REASON</div>
+
+<select>
+
+<option>Fever</option>
+
+<option>Vomiting</option>
+
+<option>Diarrhea</option>
+
+<option>Rash / skin concern</option>
+
+<option>Other</option>
+
+</select>
+
+<div class="label">OBSERVED TEMPERATURE</div>
+
+<input value="101.4 °F">
+
+<div class="label">TIME SENT HOME</div>
+
+<input value="1:15 PM">
+
+<div class="label">NOTES</div>
+
+<textarea rows="4">Child appeared tired and warm. Parent contacted for pickup.</textarea>
+
+<button onclick="showScreen('policy')">
+
+Continue
+
+</button>
+
+</section>
+
+<!-- POLICY -->
+
+<section id="policy" class="screen">
+
+<button class="back" onclick="showScreen('report')">
+
+← Incident
+
+</button>
+
+<h2>Return Requirements</h2>
+
+<p class="subtitle">
+
+Based on the center's configured policy.
+
+</p>
+
+<div class="card">
+
+<div class="row">
+
+<strong>Fever Policy</strong>
+
+<span class="pill pending">Center Policy</span>
+
+</div>
+
+<p>
+
+Emma must meet Little Pines Learning Center's configured fever-return requirements before returning to care.
+
+</p>
+
+<p class="small">
+
+Policies are configured by center administration.
+
+</p>
+
+</div>
+
+<button onclick="showScreen('sent')">
+
+Send Parent Notification
+
+</button>
+
+</section>
+
+<!-- SENT -->
+
+<section id="sent" class="screen">
+
+<h2>Notification Sent ✓</h2>
+
+<div class="success">
+
+<strong>Emma's parent has been notified.</strong>
+
+<p class="small">
+
+The incident has been documented and time-stamped.
+
+</p>
+
+</div>
+
+<button onclick="showScreen('parent')">
+
+Preview Parent View
+
+</button>
+
+<button class="secondary" onclick="showScreen('home')">
+
+Back to Dashboard
+
+</button>
+
+</section>
+
+<!-- PARENT VIEW -->
+
+<section id="parent" class="screen">
+
+<h2>Emma's Return Status</h2>
+
+<p class="subtitle">
+
+Parent View • Little Pines Learning Center
+
+</p>
+
+<div class="card">
+
+<div class="row">
+
+<strong>Current Status</strong>
+
+<span class="pill notready">Not Cleared</span>
+
+</div>
+
+<p>
+
+Emma was sent home after a fever was recorded.
+
+</p>
+
+</div>
+
+<div class="card">
+
+<h3>Before Returning</h3>
+
+<p>
+
+Please review and follow Little Pines Learning Center's fever-return policy.
+
+</p>
+
+<button class="secondary" onclick="acknowledge(this)">
+
+Acknowledge Policy
+
+</button>
+
+<button class="secondary" onclick="demoUpload()">
+
+Upload Documentation
+
+</button>
+
+</div>
+
+<button onclick="showScreen('case')">
+
+Preview Staff Review
+
+</button>
+
+</section>
+
+<!-- CASE -->
+
+<section id="case" class="screen">
+
+<button class="back" onclick="showScreen('home')">
+
+← Dashboard
+
+</button>
+
+<h2>Emma Carter</h2>
+
+<p class="subtitle">
+
+Illness Case #R2R-1042
+
+</p>
+
+<div class="card">
+
+<div class="row">
+
+<strong>Return Status</strong>
+
+<span class="pill pending">Pending</span>
+
+</div>
+
+<p>
+
+✓ Incident documented
+
+</p>
+
+<p>
+
+✓ Parent notified
+
+</p>
+
+<p>
+
+✓ Policy acknowledged
+
+</p>
+
+<p>
+
+○ Return requirements reviewed
+
+</p>
+
+<p>
+
+○ Staff approval
+
+</p>
+
+</div>
+
+<button onclick="showScreen('review')">
+
+Review Return Request
+
+</button>
+
+</section>
+
+<!-- STAFF REVIEW -->
+
+<section id="review" class="screen">
+
+<button class="back" onclick="showScreen('case')">
+
+← Emma's Case
+
+</button>
+
+<h2>Staff Return Review</h2>
+
+<p class="subtitle">
+
+Confirm the center's requirements have been satisfied.
+
+</p>
+
+<div class="card">
+
+<h3>Center Checklist</h3>
+
+<p>☑ Parent acknowledged policy</p>
+
+<p>☑ Required information received</p>
+
+<p>☐ Staff confirms return under center policy</p>
+
+</div>
+
+<button onclick="showScreen('cleared')">
+
+Confirm Return Cleared
+
+</button>
+
+<button class="secondary" onclick="keepPending()">
+
+Keep Pending
+
+</button>
+
+</section>
+
+<!-- CLEARED -->
+
+<section id="cleared" class="screen">
+
+<h2>Ready to Return ✓</h2>
+
+<div class="success">
+
+<strong>
+
+Emma has been cleared by staff under the center's configured policy.
+
+</strong>
+
+<p class="small">
+
+The parent receives the updated status and the staff review is recorded.
+
+</p>
+
+</div>
+
+<button onclick="showScreen('home')">
+
+Return to Dashboard
+
+</button>
+
+</section>
+
+</div>
+
+<script>
+
+function showScreen(id) {
+
+  document.querySelectorAll(".screen").forEach(function(screen) {
+
+    screen.classList.remove("active");
+
+  });
+
+  document.getElementById(id).classList.add("active");
+
+  window.scrollTo({
+
+    top: 0,
+
+    behavior: "smooth"
+
+  });
+
+}
+
+function acknowledge(button) {
+
+  button.innerHTML = "✓ Policy Acknowledged";
+
+  button.disabled = true;
+
+}
+
+function demoUpload() {
+
+  alert(
+
+    "Ready2Return Demo\\n\\nIn the finished app, the parent could upload a doctor's note or other documentation here."
+
+  );
+
+}
+
+function keepPending() {
+
+  alert(
+
+    "Return remains pending. The parent would be notified if additional information is required."
+
+  );
+
+}
+
+</script>
+
+</body>
+
+</html>
